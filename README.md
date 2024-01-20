@@ -2,7 +2,7 @@
 **Rowing Data Analysis Project**
 
 **Overview**
-Welcome to my Rowing Data Analysis Project. This repository is dedicated to analyzing data collected from my rowing sessions on an RP3 rowing ergometer. The primary goal is to gain insights into various aspects of my rowing performance, including stroke efficiency, power output, endurance, and pacing strategies.
+9Welcome to my Rowing Data Analysis Project. This repository is dedicated to analyzing data collected from my rowing sessions on an RP3 rowing ergometer. The primary goal is to gain insights into various aspects of my rowing performance, including stroke efficiency, power output, endurance, and pacing strategies.
 I will be recording a range of rowing workouts (following the workout plan at my boat club) including UT2, UT1 amd 
 
 **Current Status**
@@ -52,4 +52,4 @@ Machine Learning: Potential future use of PyTorch for predictive modeling and de
 Repository Management: GitHub
 
 **Future Directions**
-Machine Learning Exploration: Plan to leverage PyTorch to apply machine learning techniques to the data, potentially developing predictive models for performance optimization.
+Machine Learning Exploration: Plan to leverage PyTorch to apply machine learning techniques to the data, potentially developing predictive models for performance optimization. If exploration goes well with my own data, I will approach other rowers/boat clubs for more data

@@ -71,17 +71,15 @@ df_at["combined_curve_score"] = (
 )
 
 #Formula for UT2 workout Curve Score
-# F/F_max * 0.3 + A/A_max * 0.3 + D/D_max * 0.1 + SL/SL_max * 0.3
-w1_ut2 = 0.1#0.3
-w2_ut2 = 0.4#0.3
-w3_ut2 = 0.1#0.1
-w4_ut2 = 0.5#0.3
+# F/F_max * 0.1 + A/A_max * 0.4 + SL/SL_max * 0.5
+w1_ut2 = 0.1
+w2_ut2 = 0.4
+w3_ut2 = 0.5
 
 df_ut2["combined_curve_score"] = (
     df_ut2["peak_force"] / df_ut2["peak_force"].max() * w1_ut2 +
     df_ut2["energy_sum"] / df_ut2["energy_sum"].max() * w2_ut2 +
-    #df_ut2["distance_per_stroke"] / df_ut2["distance_per_stroke"].max() * w3_ut2 +
-    df_ut2["stroke_length"] / df_ut2["stroke_length"].max() * w4_ut2
+    df_ut2["stroke_length"] / df_ut2["stroke_length"].max() * w3_ut2
 )
 #Ideal stroke from AT that is above UT2 threshold as can include one of initial few strokes to get the erg to speed
 max_for_at_step1 = df_at.loc[(df_at["pulse"] > 160)]
@@ -115,10 +113,10 @@ fig, curve = plt.subplots()
 at_linspace = np.linspace(0, max_for_at_step2["stroke_length"].to_numpy()[0], len(max_for_at))
 ut2_linspace = np.linspace(0, max_for_ut2_step2["stroke_length"].to_numpy()[0], len(max_for_ut2))
 
-curve.plot(at_linspace, max_for_at, c="blue")
-curve.plot(ut2_linspace, max_for_ut2, c="orange")
+curve.plot(at_linspace, max_for_at, c="blue", label="Best AT")
+curve.plot(ut2_linspace, max_for_ut2, c="orange", label="Best UT2")
 
-#Calculating Best stroke curve
+#Calculating Best stroke curve in AT Workouts
 best_peak_force_pos = max_for_ut2_step2["peak_force_pos"].to_numpy()[0]
 best_peak_force = max_for_at_step2["peak_force"].to_numpy()[0]
 best_stroke_length = max_for_ut2_step2["stroke_length"].to_numpy()[0]
@@ -127,8 +125,10 @@ spline = CubicHermiteSpline([0, best_peak_force_pos, best_stroke_length], [0, be
 x = np.linspace(0, best_stroke_length, 70)
 best_curve_data = spline(x)
 
-curve.plot(x, best_curve_data, c="green")
-
+curve.plot(x, best_curve_data, c="green", label="Best Curve")
+plt.xlabel("Stroke Length (cm)")
+plt.ylabel("Force (N)")
+plt.legend()
 plt.show()
 
 fig2, score = plt.subplots()
